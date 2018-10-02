@@ -21,11 +21,11 @@ COPY function/shard.yml shard.yml
 RUN shards install
 RUN crystal build main.cr -o handler
 
-FROM alpine:3.8
-RUN apk --no-cache add ca-certificates
+FROM crystallang/crystal:0.26.1
+RUN apt install ca-certificates
 
 # Add non root user
-RUN addgroup -S app && adduser -S -g app app
+RUN adduser app
 RUN mkdir -p /home/app
 
 WORKDIR /home/app
